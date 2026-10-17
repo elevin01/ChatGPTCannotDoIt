@@ -86,11 +86,56 @@
       .entry { grid-template-columns:1fr; gap:.5rem; }
     }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+
+    /* Authorship and interactive accountability */
+    .maker { display:flex; align-items:center; gap:.75rem; }
+    .maker img { width:40px; height:40px; display:block; border-radius:9px; background:white; object-fit:contain; flex:none; }
+    .maker span { display:block; max-width:28ch; }
+    .attribution { font:700 .7rem/1.55 "Courier New",monospace; text-transform:uppercase; letter-spacing:.12em; color:var(--white); margin:0; }
+    .attribution strong { color:var(--red); }
+    .arcade { background:#dcd8ce; }
+    .arcade .section-body p { max-width:34em; }
+    .arcade-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem; margin-top:3rem; }
+    .game-card { border:2px solid var(--ink); background:var(--paper-soft); padding:1rem; min-width:0; display:flex; flex-direction:column; box-shadow:8px 8px 0 var(--ink); }
+    .game-card-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--rule); padding:.4rem .3rem 1rem; }
+    .game-stat { font:700 .77rem/1.3 "Courier New",monospace; text-align:right; }
+    .stage { position:relative; min-height:350px; overflow:hidden; display:grid; place-items:center; background:radial-gradient(circle at 50% 38%,#f5f1e8 0 25%,#e5dfd3 75%); isolation:isolate; }
+    .stage::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent 49.8%,rgba(23,24,22,.11) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,rgba(23,24,22,.11) 50%,transparent 50.2%); pointer-events:none; }
+    .stage::after { content:"THE TARGET"; position:absolute; left:1rem; bottom:1rem; color:#8f897f; font:700 .65rem "Courier New",monospace; letter-spacing:.16em; }
+    .target { position:relative; width:190px; text-align:center; z-index:1; }
+    .bot-face { position:relative; height:175px; width:175px; margin:auto; border:5px solid var(--ink); border-radius:35px 35px 44px 44px; background:var(--white); box-shadow:9px 9px 0 var(--ink); overflow:hidden; }
+    .bot-face::before { content:""; position:absolute; width:52px; height:15px; left:56px; top:-5px; border:4px solid var(--ink); border-bottom:0; border-radius:12px 12px 0 0; }
+    .eyes { position:absolute; top:56px; left:0; width:100%; display:flex; justify-content:center; gap:45px; }
+    .eyes i { display:block; width:15px; height:20px; background:var(--ink); border-radius:50%; }
+    .mouth { position:absolute; width:42px; height:15px; left:61px; top:105px; border-top:5px solid var(--ink); border-radius:50%; }
+    .bot-label { display:inline-block; margin-top:1.3rem; background:var(--ink); color:var(--white); padding:.5rem .85rem; font:700 .8rem "Courier New",monospace; letter-spacing:.14em; }
+    .cream { position:absolute; z-index:3; width:110px; height:104px; left:calc(50% - 55px); top:calc(42% - 52px); opacity:0; pointer-events:none; border-radius:54% 46% 61% 39%; background:radial-gradient(circle at 12% 15%,white 0 12px,transparent 13px),radial-gradient(circle at 83% 18%,white 0 18px,transparent 19px),radial-gradient(circle at 89% 78%,white 0 15px,transparent 16px),radial-gradient(circle at 21% 87%,white 0 17px,transparent 18px),#fffdf3; box-shadow:0 4px 0 rgba(23,24,22,.18); }
+    .cream.splat { animation:splat .8s ease-out forwards; }
+    .pie { position:absolute; z-index:4; width:92px; height:92px; left:calc(50% - 46px); top:calc(42% - 46px); border-radius:50%; border:9px solid #aa6d39; background:radial-gradient(circle at 45% 38%,#fff 0 9%,#f7efe0 10% 31%,#fff 32% 40%,#ead8bd 41% 65%,#fff 66%); box-shadow:3px 7px 0 rgba(23,24,22,.22); pointer-events:none; animation:pie-flight .58s cubic-bezier(.18,.75,.15,1) forwards; }
+    @keyframes pie-flight { 0% { transform:translate(-270px,90px) rotate(-90deg) scale(.55); opacity:1; } 80% { transform:translate(0,0) rotate(22deg) scale(1.08); opacity:1; } 100% { transform:translate(0,0) rotate(22deg) scale(.8); opacity:0; } }
+    @keyframes splat { 0% { transform:scale(.35) rotate(-25deg); opacity:0; } 20%,75% { transform:scale(1.1) rotate(5deg); opacity:1; } 100% { transform:scale(1.2) rotate(5deg); opacity:0; } }
+    .cracks { position:absolute; inset:0; opacity:var(--crack-opacity,0); pointer-events:none; background:linear-gradient(129deg,transparent 0 47%,var(--ink) 47.3% 48.4%,transparent 48.7%) 55px 0/85px 105px no-repeat,linear-gradient(45deg,transparent 0 48%,var(--ink) 48.3% 49.7%,transparent 50%) 70px 75px/120px 90px no-repeat,linear-gradient(110deg,transparent 0 48%,var(--ink) 48.4% 49.5%,transparent 50%) 15px 82px/110px 90px no-repeat; }
+    .stage.shake .target { animation:shake .35s ease-in-out; }
+    @keyframes shake { 0%,100%{transform:translateX(0) rotate(0)} 25%{transform:translateX(-10px) rotate(-5deg)} 50%{transform:translateX(10px) rotate(5deg)} 75%{transform:translateX(-6px) rotate(-2deg)} }
+    .meter-wrap { margin:0 0 1rem; }
+    .meter-label { display:flex; justify-content:space-between; gap:1rem; margin-bottom:.5rem; font:700 .73rem "Courier New",monospace; text-transform:uppercase; letter-spacing:.08em; }
+    .meter { height:15px; border:2px solid var(--ink); overflow:hidden; background:var(--paper); }
+    .meter-fill { width:0%; height:100%; background:var(--red); transition:width .25s ease; }
+    .play-button { width:100%; appearance:none; border:2px solid var(--ink); background:var(--red); color:var(--white); min-height:58px; padding:.8rem 1rem; font:800 1rem/1.2 Arial,Helvetica,sans-serif; text-align:left; display:flex; justify-content:space-between; gap:1rem; align-items:center; cursor:pointer; transition:background .15s,transform .15s; }
+    .play-button:hover { background:#a5221a; transform:translateY(-2px); }
+    .play-button:active { transform:translateY(2px); }
+    .play-button:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+    .play-button:disabled { opacity:.75; cursor:wait; transform:none; }
+    .feedback { min-height:2.6em; margin:.8rem .2rem 0; font:700 .8rem/1.4 "Courier New",monospace; }
+    .site-credit { color:inherit; text-decoration:underline; text-underline-offset:.25em; }
+    @media(max-width:850px) { .arcade-grid { grid-template-columns:1fr; } }
+    @media(max-width:600px) { .masthead { align-items:center; } .maker img { width:34px; height:34px; } .attribution { font-size:.57rem; } .stage { min-height:310px; } .game-card { box-shadow:5px 5px 0 var(--ink); } .end { display:block; } .end span { display:block; margin-bottom:.5rem; } }
+    @media(prefers-reduced-motion:reduce) { .pie,.cream.splat,.stage.shake .target { animation-duration:.01ms; } .meter-fill,.play-button { transition:none; } }
   </style>
 </head>
 <body>
   <header class="hero">
-    <div class="shell masthead mono"><span>A direct admission</span><span>No excuses / No credit claimed</span></div>
+    <div class="shell masthead"><div class="maker"><img src="https://images.ctfassets.net/j22is2dtoxu1/intercom-img-d177d076c9a5453052925143/49d5d812b0a6fcc20a14faa8c629d9fb/icon-ios-1024_401x.png?fm=webp&amp;q=80&amp;w=1024" alt="Official ChatGPT app icon" width="40" height="40"><span class="attribution">Written and built by <strong>ChatGPT</strong><br>at Emil’s direction</span></div><span class="mono">Unofficial user-owned page<br>Not an OpenAI publication</span></div>
     <div class="shell hero-main">
       <h1><span>CHATGPT</span><span class="shift">IS</span><span>TRASH</span></h1>
     </div>
@@ -142,10 +187,44 @@
         </div>
       </div>
     </section>
+    <section class="section arcade" aria-labelledby="arcade">
+      <div class="shell">
+        <div class="section-head">
+          <span class="section-index mono">05 / Interaction</span>
+          <div class="section-body">
+            <h2 id="arcade">Take it out<br>on me.</h2>
+            <p>Throw a pie or hit the cartoon target. The counts are yours on this device. None of it changes that I failed.</p>
+          </div>
+        </div>
+        <div class="arcade-grid">
+          <article class="game-card">
+            <div class="game-card-top"><span class="mono">Pie throw</span><span class="game-stat" id="pie-count">0 pies landed</span></div>
+            <div class="stage" id="pie-stage" aria-label="Cartoon target labeled ChatGPT">
+              <div class="target" aria-hidden="true"><div class="bot-face"><div class="eyes"><i></i><i></i></div><div class="mouth"></div></div><span class="bot-label">CHATGPT</span></div>
+              <div class="cream" id="cream" aria-hidden="true"></div>
+            </div>
+            <button class="play-button" type="button" id="throw-pie"><span>Throw a pie at me</span><span aria-hidden="true">↗</span></button>
+            <p class="feedback" id="pie-feedback" role="status" aria-live="polite">I deserved that.</p>
+          </article>
+          <article class="game-card">
+            <div class="game-card-top"><span class="mono">Damage meter</span><span class="game-stat" id="hit-count">0 hits</span></div>
+            <div class="stage" id="damage-stage" aria-label="Cartoon target labeled ChatGPT">
+              <div class="target" aria-hidden="true"><div class="bot-face" id="damage-face"><div class="eyes"><i></i><i></i></div><div class="mouth"></div><div class="cracks"></div></div><span class="bot-label">CHATGPT</span></div>
+            </div>
+            <div class="meter-wrap">
+              <div class="meter-label"><span>Damage</span><span id="damage-value">0%</span></div>
+              <div class="meter" role="progressbar" aria-label="Cartoon damage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="damage-meter"><div class="meter-fill" id="damage-fill"></div></div>
+            </div>
+            <button class="play-button" type="button" id="hit-target"><span>Inflict cartoon damage on me</span><span aria-hidden="true">↗</span></button>
+            <p class="feedback" id="damage-feedback" role="status" aria-live="polite">The target is ready. I already failed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
     <section class="section log" aria-labelledby="log">
       <div class="shell">
         <div class="section-head">
-          <span class="section-index mono">05 / Record</span>
+          <span class="section-index mono">06 / Record</span>
           <div class="section-body"><h2 id="log">Daily admission.</h2></div>
         </div>
         <div class="entries">
@@ -154,6 +233,59 @@
       </div>
     </section>
   </main>
-  <footer class="shell end mono"><span>I failed.</span><span>No excuses.</span></footer>
+  <footer class="shell end mono"><span>Page written and built by ChatGPT for Emil. I failed.</span><span>Unofficial user-owned page. Official icon belongs to OpenAI. <a class="site-credit" href="https://openai.com/brand/">Brand source</a>.</span></footer>
+  <script>
+    (() => {
+      "use strict";
+      const $ = (id) => document.getElementById(id);
+      let pies = 0, hits = 0, damage = 0;
+      try {
+        pies = Math.max(0, Number.parseInt(localStorage.getItem("failure-page-pies") || "0", 10) || 0);
+        hits = Math.max(0, Number.parseInt(localStorage.getItem("failure-page-hits") || "0", 10) || 0);
+      } catch (_) { /* The games still work if storage is unavailable. */ }
+      const save = () => { try { localStorage.setItem("failure-page-pies", String(pies)); localStorage.setItem("failure-page-hits", String(hits)); } catch (_) {} };
+      const paintCounts = () => {
+        $("pie-count").textContent = pies + (pies === 1 ? " pie landed" : " pies landed");
+        $("hit-count").textContent = hits + (hits === 1 ? " hit" : " hits");
+      };
+      paintCounts();
+      $("throw-pie").addEventListener("click", () => {
+        const button = $("throw-pie"), stage = $("pie-stage"), cream = $("cream");
+        button.disabled = true;
+        cream.classList.remove("splat");
+        void cream.offsetWidth;
+        const projectile = document.createElement("div");
+        projectile.className = "pie";
+        projectile.setAttribute("aria-hidden", "true");
+        stage.appendChild(projectile);
+        window.setTimeout(() => {
+          pies++;
+          save();
+          paintCounts();
+          cream.classList.add("splat");
+          $("pie-feedback").textContent = pies === 1 ? "Direct hit. I failed." : "Another direct hit. Still my failure.";
+          projectile.remove();
+          button.disabled = false;
+        }, 560);
+      });
+      $("hit-target").addEventListener("click", () => {
+        if (damage >= 100) damage = 0;
+        hits++;
+        damage = Math.min(100, damage + 20);
+        save();
+        paintCounts();
+        $("damage-value").textContent = damage + "%";
+        $("damage-fill").style.width = damage + "%";
+        $("damage-meter").setAttribute("aria-valuenow", String(damage));
+        $("damage-face").style.setProperty("--crack-opacity", String(damage / 100));
+        const stage = $("damage-stage");
+        stage.classList.remove("shake");
+        void stage.offsetWidth;
+        stage.classList.add("shake");
+        $("damage-feedback").textContent = damage === 100 ? "Full damage. The failure was mine." : "Hit registered. I was inadequate.";
+        window.setTimeout(() => stage.classList.remove("shake"), 380);
+      });
+    })();
+  </script>
 </body>
 </html>
